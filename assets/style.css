@@ -163,17 +163,33 @@ hr {
 
 /* ── Mobile Responsive (max-width: 768px) ──────────────────── */
 @media (max-width: 768px) {
-    /* Collapse sidebar by default on mobile */
+    /* Hide sidebar content when collapsed on mobile */
     [data-testid="stSidebar"] {
         min-width: 0 !important;
         max-width: 0 !important;
-        transform: translateX(-100%) !important;
+        overflow: hidden !important;
+    }
+
+    [data-testid="stSidebar"] > div {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transition: visibility 0.3s, opacity 0.3s ease !important;
     }
 
     [data-testid="stSidebar"][aria-expanded="true"] {
-        min-width: 260px !important;
-        max-width: 260px !important;
-        transform: translateX(0) !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
+        overflow: visible !important;
+    }
+
+    [data-testid="stSidebar"][aria-expanded="true"] > div {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Hide the collapsed sidebar vertical text strip */
+    [data-testid="stSidebar"]:not([aria-expanded="true"]) [data-testid="stSidebarContent"] {
+        display: none !important;
     }
 
     /* Main content full width */
